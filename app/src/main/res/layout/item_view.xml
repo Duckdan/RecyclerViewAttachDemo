@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+LinearLayout换成RelativeLayout之后
+ LayoutInflater.from(context).inflate(R.layout.item_view, null)的调用方式将会横向填充屏幕
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@android:id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+       />
+
+
+</RelativeLayout>
