@@ -1,13 +1,12 @@
 package com.study.recyclerviewdemo
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Rect
+import android.graphics.*
+import android.os.Build
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.study.recyclerviewdemo.adapter.RvAdapter
@@ -133,16 +132,24 @@ class AttachItemDecoration : RecyclerView.ItemDecoration {
                         left.toFloat(),
                         top.toFloat(),
                         right.toFloat(),
-                        bottom.toFloat(),
+                        top + bottom.toFloat(),
                         groupPaint
                     )
+                    groupPaint.color = Color.BLACK
+                    val baseLine = top + bottom.toFloat() - groupHeight / 2 + textRect.height() / 2
+                    if (baseLine >= top + textRect.height()) {
+
+                    } else {
+                        //必须在文本绘制之前调用
+                        c.clipRect(left.toFloat(), 0f, right.toFloat(), top.toFloat(), Region.Op.DIFFERENCE)
+                    }
                     groupPaint.color = Color.BLACK
                     c.drawText(
                         groupName,
                         0,
                         groupName.length,
                         left.toFloat(),
-                        bottom.toFloat()  - groupHeight / 2 + textRect.height() / 2,
+                        baseLine,
                         groupPaint
                     )
                 } else {
